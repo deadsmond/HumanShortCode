@@ -1,6 +1,16 @@
 export const ID_CODE_ALPHABET = "ASDEIUNWRQXBOKH";
 export const ID_CODE_LENGTH = 8;
 
+/**
+ * encode number into human short code
+ * @param idNumber number to encode
+ * @param alphabet string of characters number would be cast into.
+ * First characters should be the most accessible for users, specially on smartphones.
+ * Initial alphabet starts with most commonly accessed letters.
+ * @param length how many alphabet characters should the short code contain.
+ * It DOES NOT count underscore in the middle!
+ * @returns human short code
+ */
 export const encode = (
   idNumber: number,
   alphabet: string = ID_CODE_ALPHABET,
@@ -32,6 +42,14 @@ export const encode = (
   return letters.slice(0, half) + "-" + letters.slice(half);
 };
 
+/**
+ * decode human short code into number, using provided alphabet.
+ * It has to be the same alphabet in order to receive the same number!
+ * @param idString short code to decode
+ * @param alphabet alphabet used in encoding of idString
+ * @param length how many characters is short code supposed to be, excluding underscore in the middle
+ * @returns
+ */
 export const decode = (
   idString: string,
   alphabet: string = ID_CODE_ALPHABET,
@@ -59,13 +77,15 @@ export const decode = (
 /**
  * check whether string is valid code
  * @param code
+ * @param alphabet
+ * @param length
  * @returns
  */
 export const verify = (
   code: string,
   alphabet: string = ID_CODE_ALPHABET,
   length: number = ID_CODE_LENGTH
-) => {
+): boolean => {
   const cleanedCode = code.replace("-", "").toUpperCase();
   return (
     cleanedCode.length <= length &&
