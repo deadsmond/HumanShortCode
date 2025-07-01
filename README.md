@@ -92,3 +92,7 @@ console.log(code); // e.g. "BAC-DEF"
 const num = hsc.decode(code, customAlphabet, codeLength);
 console.log(num); // 987654
 ```
+
+## Tests
+
+`npm run test`
