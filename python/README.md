@@ -51,9 +51,9 @@ print(verify(code))  # True
 
 Convert an integer into a short, fixed-length alphanumeric code.
 
-- id_number — Integer to encode
-- alphabet — Optional custom alphabet (default: "ASDEIUNWRQXBOKH")
-- length — Total code length excluding hyphen (default: 8)
+- id_number: Integer to encode
+- alphabet: Optional custom alphabet (default: "ASDEIUNWRQXBOKH")
+- length: Total code length excluding hyphen (default: 8)
 
 Returns a code string with a hyphen inserted at the center.
 
@@ -61,9 +61,9 @@ Returns a code string with a hyphen inserted at the center.
 
 Decode a code string back into the original integer.
 
-- code — Code string to decode
-- alphabet — Optional custom alphabet used in encoding
-- length — Expected code length excluding hyphen
+- code: Code string to decode
+- alphabet: Optional custom alphabet used in encoding
+- length: Expected code length excluding hyphen
 
 Raises ValueError if invalid input.
 
@@ -71,9 +71,9 @@ Raises ValueError if invalid input.
 
 Check if a code is valid for the given alphabet and length.
 
-- code — Code string to verify
-- alphabet — Optional alphabet to validate against
-- length — Maximum code length excluding hyphen
+- code: Code string to verify
+- alphabet: Optional alphabet to validate against
+- length: Maximum code length excluding hyphen
 
 Returns True if valid, False otherwise.
 
