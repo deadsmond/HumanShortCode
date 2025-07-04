@@ -1,98 +1,101 @@
 # Human Short Code
 
-Small function to replace long numbers with ABCD-EFGH code ids.
-
-Encode numbers into short, human-friendly codes and decode them back reliably.  
-
-Useful for generating referral codes, room codes, or compact IDs with a custom alphabet.
+Encode integers into compact, human-readable codes and decode them reliably.  
+Useful for generating invitation codes, referral links, tracking IDs, or session tokens.
 
 ## Features
 
-- Encode numbers to short strings with a custom alphabet  
-- Decode short strings back to numbers  
-- Verify if a code is valid  
-- Configurable code length and alphabet  
-- Inserts a hyphen in the middle for better readability  
+- Encode numbers into fixed-length readable codes  
+- Decode codes back to original numbers  
+- Validate code format  
+- Customizable alphabet and length  
+- Mid-string hyphen for clarity  
 
 ## Installation
 
 ```bash
-npm install human-short-code
+pip install human-short-code
 ```
 
-or
+Or install from source:
 
 ```bash
-yarn add human-short-code
+git clone https://github.com/yourusername/human-short-code.git
+cd human-short-code
+python -m build
+pip install dist/*.whl
 ```
 
 ## Usage
 
-```typescript
-import { hsc } from "human-short-code";
+```python
+from human_short_code import encode, decode, verify
 
-const myNumber = 123456789;
+number = 123456789
 
-// Encode number to short code
-const shortCode = hsc.encode(myNumber);
-console.log(shortCode); // Example output: "QIUN-ESAD"
+# Encode number
+code = encode(number)
+print(code)  # e.g. 'QIUN-ESAD'
 
-// Decode short code back to number
-const originalNumber = hsc.decode(shortCode);
-console.log(originalNumber); // 123456789
+# Decode code
+original = decode(code)
+print(original)  # 123456789
 
-// Verify if a code is valid
-const isValid = hsc.verify(shortCode);
-console.log(isValid); // true
+# Verify code format
+print(verify(code))  # True
 ```
 
 ## API
 
-`hsc.encode(idNumber: number, alphabet?: string, length?: number): string`
+`encode(id_number: int, alphabet: str = ..., length: int = ...) -> str`
 
-Encode a number into a human-readable short code.
+Convert an integer into a short, fixed-length alphanumeric code.
 
-- idNumber — Number to encode
-- alphabet — Optional custom alphabet string (default: "ASDEIUNWRQXBOKH")
-- length — Length of the generated code excluding hyphen (default: 8)
+- id_number — Integer to encode
+- alphabet — Optional custom alphabet (default: "ASDEIUNWRQXBOKH")
+- length — Total code length excluding hyphen (default: 8)
 
-Returns a string code with a hyphen inserted in the middle.
+Returns a code string with a hyphen inserted at the center.
 
-`hsc.decode(idString: string, alphabet?: string, length?: number): number`
+`decode(code: str, alphabet: str = ..., length: int = ...) -> int`
 
-Decode a short code string back into a number.
+Decode a code string back into the original integer.
 
-- idString — The short code to decode
-- alphabet — Optional alphabet used during encoding (default: "ASDEIUNWRQXBOKH")
-- length — Expected code length excluding hyphen (default: 8)
+- code — Code string to decode
+- alphabet — Optional custom alphabet used in encoding
+- length — Expected code length excluding hyphen
 
-Throws an error if the code is invalid.
+Raises ValueError if invalid input.
 
-`hsc.verify(code: string, alphabet?: string, length?: number): boolean`
+`verify(code: str, alphabet: str = ..., length: int = ...) -> bool`
 
-Check if a short code string is valid.
+Check if a code is valid for the given alphabet and length.
 
 - code — Code string to verify
-- alphabet — Alphabet used for validation (default: "ASDEIUNWRQXBOKH")
-- length — Maximum allowed length excluding hyphen (default: 8)
+- alphabet — Optional alphabet to validate against
+- length — Maximum code length excluding hyphen
 
-Returns true if valid, otherwise false.
+Returns True if valid, False otherwise.
 
 ## Customization
 
-You can customize the alphabet and code length:
+```python
+custom_alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ"
+custom_length = 6
 
-```typescript
-const customAlphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ"; // no confusing letters like I, O
-const codeLength = 6;
+code = encode(987654, custom_alphabet, custom_length)
+print(code)  # e.g. 'BAC-DEF'
 
-const code = hsc.encode(987654, customAlphabet, codeLength);
-console.log(code); // e.g. "BAC-DEF"
-
-const num = hsc.decode(code, customAlphabet, codeLength);
-console.log(num); // 987654
+number = decode(code, custom_alphabet, custom_length)
+print(number)  # 987654
 ```
 
 ## Tests
 
-`npm run test`
+```bash
+pytest
+```
+
+## License
+
+MIT
